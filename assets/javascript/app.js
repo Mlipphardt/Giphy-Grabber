@@ -41,12 +41,22 @@ function getCountryGifs(){
             let gifImg = $("<img>");
             $(gifImg).attr("src", gifResults[i].images.fixed_height_small_still.url);
             $(gif).append(p, gifImg);
-            $("#gifs-grabbed").append(gif);
+            $("#gifs-grabbed").prepend(gif);
             
         }
 
     })
  }
+
+
+$("#add-country").on("click", function(){
+    event.preventDefault();
+    let newCountry = $("#country-input").val().trim();
+    console.log(newCountry);
+    countries.push(newCountry);
+    console.log(countries);
+    buttonCreator(countries);
+})
 
 //Event listener for buttons, works with dynamically created elements
 $(document).on("click", ".country-btn", getCountryGifs);
