@@ -39,7 +39,11 @@ function getCountryGifs(){
             let p = $("<p>");
             $(p).text("Rating: " + gifResults[i].rating)
             let gifImg = $("<img>");
-            $(gifImg).attr("src", gifResults[i].images.fixed_height_small_still.url);
+            $(gifImg).attr("src", gifResults[i].images.fixed_height.url);
+            $(gifImg).attr("data-animate", gifResults[i].images.fixed_height.url);
+            $(gifImg).attr("data-still", gifResults[i].images.fixed_height_still.url);
+            $(gifImg).attr("data-state", "animated");
+            $(gifImg).addClass("country-gif");
             $(gif).append(p, gifImg);
             $("#gifs-grabbed").prepend(gif);
             
@@ -48,6 +52,15 @@ function getCountryGifs(){
     })
  }
 
+function changeAnimationState(){
+    if($(this).attr("data-state") == "animated"){
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    } else {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animated");
+    }
+}
 
 $("#add-country").on("click", function(){
     event.preventDefault();
@@ -60,5 +73,8 @@ $("#add-country").on("click", function(){
 
 //Event listener for buttons, works with dynamically created elements
 $(document).on("click", ".country-btn", getCountryGifs);
+
+$(document).on("click", ".country-gif", changeAnimationState);
+
 
 buttonCreator(countries);
