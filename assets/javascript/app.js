@@ -22,18 +22,13 @@ function buttonCreator(array){
 
 function getCountryGifs(){
     let country = $(this).attr("data-name");
-    console.log(country);
     let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + country + "&apikey=" + apikey + "&limit=10"
     $.ajax({
         url: queryURL,
         method: "GET",
-        // xhrFields: {
-        //     withCredentials: true
-        //  }
+
     }).then(function(response){
-        console.log(response)
-        console.log(response.data);
-        let gifResults = response.data;
+               let gifResults = response.data;
         for (let i = 0; i < gifResults.length; i++) {
             let gif = $("<div>");
             let p = $("<p>");
@@ -65,9 +60,7 @@ function changeAnimationState(){
 $("#add-country").on("click", function(){
     event.preventDefault();
     let newCountry = $("#country-input").val().trim();
-    console.log(newCountry);
     countries.push(newCountry);
-    console.log(countries);
     buttonCreator(countries);
 })
 
