@@ -22,7 +22,7 @@ function buttonCreator(array){
 
 function getCountryGifs(){
     let country = $(this).attr("data-name");
-    let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + country + "&apikey=" + apikey + "&limit=10"
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + country + "&apikey=" + apikey + "&limit=10"
     $.ajax({
         url: queryURL,
         method: "GET",
